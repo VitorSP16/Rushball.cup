@@ -1,10 +1,18 @@
 package br.com.rushball.rushball.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -29,7 +37,7 @@ public class Jogador {
     private String nomeJogador;
     
     @NotBlank(message = "A posição do jogador é obrigatória.")
-    @Size (max = 50,message = "A posição do jogador é obrigatória.")
+    @Size(max = 50, message = "A posição deve ter no máximo 50 caracteres.")
     @Column(nullable = false, length = 50)
     private String posicaoJogador;
     
@@ -37,4 +45,17 @@ public class Jogador {
     @Max(value = 99,message = "O número da camisa deve ser no máximo 99.")
     @Column
     private Integer numeroCamisaJogador;
+
+    @OneToMany(mappedBy = "jogador")
+     private List<Noticia> noticias = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_selecao", nullable = false)
+       private Selecao selecao;
+
+    @ManyToMany(mappedBy = "jogadoresFavoritos")
+      private List<Usuario> usuariosFavoritos = new ArrayList<>();
+
+      @OneToMany(mappedBy = "jogador")
+       private List<EstatisticaJogador> estatisticas = new ArrayList<>();
 }

@@ -1,10 +1,14 @@
 package br.com.rushball.rushball.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -21,7 +25,7 @@ public class Selecao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSelecao;
     
-    @NotBlank(message = "O nome da seleção é obrigatório.")
+    @NotBlank(message = "O país da seleção é obrigatório.")
     @Size(max = 100 ,message="O nome deve ter no máximo 100 caracteres.")
     @Column(nullable = false, length = 100)
     private String nomeSelecao;
@@ -38,4 +42,19 @@ public class Selecao {
     @Size(max = 10,message = "O grupo deve ter no máximo 10 caracteres.")
     @Column(length = 10)
     private String grupoSelecao;
+
+    @OneToMany(mappedBy = "selecao")
+      private List<Noticia> noticias = new ArrayList<>();
+
+    @OneToMany(mappedBy = "selecao")
+      private List<Jogador> jogadores = new ArrayList<>();
+
+    @OneToMany(mappedBy = "selecaoFavorita")
+       private List<Usuario> usuariosFavoritos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "selecaoCasa")
+        private List<Jogo> jogosComoCasa = new ArrayList<>();
+
+   @OneToMany(mappedBy = "selecaoVisitante")
+       private List<Jogo> jogosComoVisitante = new ArrayList<>();
 }

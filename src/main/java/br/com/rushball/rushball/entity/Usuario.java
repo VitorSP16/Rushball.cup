@@ -4,6 +4,7 @@ package br.com.rushball.rushball.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -55,8 +56,12 @@ public class Usuario {
     @Column(nullable = false, length = 30)
     private String papelUsuario;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Comentario> comentarios = new ArrayList<>();
+    @OneToMany(
+    mappedBy = "usuario",
+    cascade = CascadeType.REMOVE,
+    orphanRemoval = true
+   )
+   private List<Comentario> comentarios = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_selecao_favorita", nullable = true)

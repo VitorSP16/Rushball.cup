@@ -29,6 +29,22 @@ public class JogoService {
                         "Jogo não encontrado: " + id));
     }
 
+    public List<Jogo> buscarPorSelecaoCasa(Long idSelecao) {
+        return jogoRepository.findBySelecaoCasaIdSelecao(idSelecao);
+    }
+
+    public List<Jogo> buscarPorSelecaoVisitante(Long idSelecao) {
+        return jogoRepository.findBySelecaoVisitanteIdSelecao(idSelecao);
+    }
+
+    public List<Jogo> buscarPorFase(String fase) {
+        return jogoRepository.findByFaseJogo(fase);
+    }
+
+    public List<Jogo> buscarPorStatus(String status) {
+        return jogoRepository.findByStatusJogo(status);
+    }
+
     public Jogo salvar(Jogo jogo) {
         return jogoRepository.save(jogo);
     }

@@ -29,6 +29,26 @@ public class NoticiaService {
                         "Notícia não encontrada: " + id));
     }
 
+    public List<Noticia> buscarPorCategoria(String categoria) {
+        return noticiaRepository.findByCategoriaNoticia(categoria);
+    }
+
+    public List<Noticia> listarDestaques() {
+        return noticiaRepository.findByDestaqueNoticiaTrue();
+    }
+
+    public List<Noticia> buscarPorSelecao(Long idSelecao) {
+        return noticiaRepository.findBySelecaoIdSelecao(idSelecao);
+    }
+
+    public List<Noticia> buscarPorJogador(Long idJogador) {
+        return noticiaRepository.findByJogadorIdJogador(idJogador);
+    }
+
+    public List<Noticia> buscarPorJogo(Long idJogo) {
+        return noticiaRepository.findByJogoIdJogo(idJogo);
+    }
+
     public Noticia salvar(Noticia noticia) {
         return noticiaRepository.save(noticia);
     }

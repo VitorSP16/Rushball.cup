@@ -29,6 +29,14 @@ public class EstatisticaJogadorService {
                         "Estatística não encontrada: " + id));
     }
 
+    public List<EstatisticaJogador> buscarPorJogadorId(Long idJogador) {
+        return estatisticaRepository.findByJogadorIdJogador(idJogador);
+    }
+
+    public List<EstatisticaJogador> buscarPorJogoId(Long idJogo) {
+        return estatisticaRepository.findByJogoIdJogo(idJogo);
+    }
+
     public EstatisticaJogador salvar(EstatisticaJogador estatistica) {
         return estatisticaRepository.save(estatistica);
     }

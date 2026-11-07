@@ -1,8 +1,11 @@
 package br.com.rushball.rushball.repository;
 
-import br.com.rushball.rushball.entity.Selecao;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SelecaoRepository extends JpaRepository<Selecao, Long> {
+import br.com.rushball.rushball.entity.Selecao;
 
+public interface SelecaoRepository extends JpaRepository<Selecao, Long> {
+  List<Selecao> findByNomeSelecaoContainingIgnoreCase(String nomeSelecao);
 }

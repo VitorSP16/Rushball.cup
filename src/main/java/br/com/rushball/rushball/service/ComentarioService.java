@@ -28,6 +28,14 @@ public class ComentarioService {
                         "Comentário não encontrado: " + id));
     }
 
+    List<Comentario> buscarPorUsuarioId(Long idUsuario) {
+        return comentarioRepository.findByUsuarioIdUsuario(idUsuario);
+    }
+
+    List<Comentario> buscarPorNoticiaId(Long idNoticia) {
+        return comentarioRepository.findByNoticiaIdNoticia(idNoticia);
+    }
+
     public Comentario salvar(Comentario comentario) {
         return comentarioRepository.save(comentario);
     }

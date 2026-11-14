@@ -12,4 +12,5 @@ public interface JogadorRepository extends JpaRepository<Jogador, Long> {
 
     List<Jogador> findByPosicaoJogadorContainingIgnoreCase(String posicaoJogador);
 
+    
 }

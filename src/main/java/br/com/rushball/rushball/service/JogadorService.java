@@ -27,6 +27,13 @@ public class JogadorService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Jogador não encontrado: " + id));
     }
+    public List<Jogador> buscarPorSelecaoId(Long idSelecao) {
+        return jogadorRepository.findBySelecaoIdSelecao(idSelecao);
+    }
+
+    public List<Jogador> buscarPorPosicao(String posicao) {
+        return jogadorRepository.findByPosicaoJogadorContainingIgnoreCase(posicao);
+    }
 
     public Jogador salvar(Jogador jogador) {
         return jogadorRepository.save(jogador);

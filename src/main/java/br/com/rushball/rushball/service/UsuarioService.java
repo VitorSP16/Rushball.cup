@@ -2,6 +2,8 @@ package br.com.rushball.rushball.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import br.com.rushball.rushball.Dto.UsuarioCadastroDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,15 +22,42 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final JogadorRepository jogadorRepository;
     private final SelecaoRepository selecaoRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UsuarioService(
             UsuarioRepository usuarioRepository,
             JogadorRepository jogadorRepository,
-            SelecaoRepository selecaoRepository) {
+            SelecaoRepository selecaoRepository,
+            PasswordEncoder passwordEncoder) {
 
         this.usuarioRepository = usuarioRepository;
         this.jogadorRepository = jogadorRepository;
         this.selecaoRepository = selecaoRepository;
+        this.passwordEncoder= passwordEncoder;
+    }
+
+    public Usuario cadastrar(UsuarioCadastroDto dto) {
+
+        if (dto.getSenhaUsuario() == null ||
+        !dto.getSenhaUsuario().equals(dto.getConfirmacaoSenha())) {
+    throw new IllegalArgumentException("As senhas não coincidem.");
+}
+    
+        if (usuarioRepository.existsByEmailUsuarioIgnoreCase(dto.getEmailUsuario().trim())) {
+            throw new IllegalArgumentException("Este email já está cadastrado.");
+        }
+       
+        Usuario usuario = new Usuario();
+        
+        usuario.setNomeUsuario(dto.getNomeUsuario().trim());
+        usuario.setEmailUsuario(dto.getEmailUsuario().trim());
+        
+        String senhaHash = passwordEncoder.encode(dto.getSenhaUsuario());
+        usuario.setSenhaUsuario(senhaHash);
+    
+        usuario.setPapelUsuario("USER");
+    
+        return usuarioRepository.save(usuario);
     }
 
     public List<Usuario> listarTodos() {

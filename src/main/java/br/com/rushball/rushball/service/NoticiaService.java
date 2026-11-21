@@ -2,7 +2,7 @@ package br.com.rushball.rushball.service;
 
 import java.util.List;
 
-import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -30,8 +30,16 @@ public class NoticiaService {
     }
 
     public List<Noticia> buscarPorCategoria(String categoria) {
-        return noticiaRepository.findByCategoriaNoticia(categoria);
+
+    if (categoria == null || categoria.isBlank()) {
+        throw new IllegalArgumentException(
+                "A categoria deve ser informada.");
     }
+
+    return noticiaRepository.findByCategoriaNoticiaIgnoreCase(
+            categoria.trim()
+    );
+}
 
     public List<Noticia> listarDestaques() {
         return noticiaRepository.findByDestaqueNoticiaTrue();
@@ -49,21 +57,5 @@ public class NoticiaService {
         return noticiaRepository.findByJogoIdJogo(idJogo);
     }
 
-    public Noticia salvar(Noticia noticia) {
-        return noticiaRepository.save(noticia);
-    }
-
-    public void excluir(Long id) {
-        if (!noticiaRepository.existsById(id)) {
-            throw new EntityNotFoundException(
-                    "Notícia não encontrada: " + id);
-        }
-
-        try {
-            noticiaRepository.deleteById(id);
-        } catch (DataIntegrityViolationException e) {
-            throw new IllegalStateException(
-                    "Não é possível excluir esta notícia porque existem comentários vinculados a ela.", e);
-        }
-    }
+        
 }

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NoticiaRepository extends JpaRepository<Noticia, Long> {
   
-    List<Noticia> findByCategoriaNoticia(String categoriaNoticia);
+    List<Noticia> findByCategoriaNoticiaIgnoreCase(String categoriaNoticia);
 
     List<Noticia> findByDestaqueNoticiaTrue();
 

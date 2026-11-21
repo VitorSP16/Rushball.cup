@@ -12,4 +12,9 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Long> {
     List<Comentario> findByUsuarioIdUsuario(Long idUsuario);
 
     List<Comentario> findByNoticiaIdNoticia(Long idNoticia);
+
+    boolean existsByIdComentarioAndUsuarioIdUsuario(
+        Long idComentario,
+        Long idUsuario
+);
 }

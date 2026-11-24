@@ -28,16 +28,5 @@ public class SelecaoService {
                         "Seleção não encontrada: " + id));
     }
 
-    public Selecao salvar(Selecao selecao) {
-        return selecaoRepository.save(selecao);
-    }
-
-    public void excluir(Long id) {
-        if (!selecaoRepository.existsById(id)) {
-            throw new EntityNotFoundException(
-                    "Seleção não encontrada: " + id);
-        }
-
-        selecaoRepository.deleteById(id);
-    }
+   
 }

@@ -25,7 +25,7 @@ public class JogadorController {
         this.selecaoService = selecaoService;
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public String listar(Model model) {
 
         model.addAttribute("jogadores", jogadorService.listarTodos());

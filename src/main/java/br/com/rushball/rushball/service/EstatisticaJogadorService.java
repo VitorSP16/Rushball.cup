@@ -37,16 +37,5 @@ public class EstatisticaJogadorService {
         return estatisticaRepository.findByJogoIdJogo(idJogo);
     }
 
-    public EstatisticaJogador salvar(EstatisticaJogador estatistica) {
-        return estatisticaRepository.save(estatistica);
-    }
-
-    public void excluir(Long id) {
-        if (!estatisticaRepository.existsById(id)) {
-            throw new EntityNotFoundException(
-                    "Estatística não encontrada: " + id);
-        }
-
-        estatisticaRepository.deleteById(id);
-    }
+   
 }

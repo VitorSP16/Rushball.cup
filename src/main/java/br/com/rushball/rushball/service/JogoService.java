@@ -45,21 +45,4 @@ public class JogoService {
         return jogoRepository.findByStatusJogo(status);
     }
 
-    public Jogo salvar(Jogo jogo) {
-        return jogoRepository.save(jogo);
-    }
-
-    public void excluir(Long id) {
-    if (!jogoRepository.existsById(id)) {
-        throw new EntityNotFoundException(
-                "Jogo não encontrado: " + id);
-    }
-
-    try {
-        jogoRepository.deleteById(id);
-    } catch (DataIntegrityViolationException e) {
-        throw new IllegalStateException(
-                "Não é possível excluir este jogo porque existem notícias ou estatísticas vinculadas a ele.", e);
-    }
-}
 }

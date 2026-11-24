@@ -32,19 +32,14 @@ public class JogadorService {
     }
 
     public List<Jogador> buscarPorPosicao(String posicao) {
-        return jogadorRepository.findByPosicaoJogadorContainingIgnoreCase(posicao);
-    }
 
-    public Jogador salvar(Jogador jogador) {
-        return jogadorRepository.save(jogador);
-    }
-
-    public void excluir(Long id) {
-        if (!jogadorRepository.existsById(id)) {
-            throw new EntityNotFoundException(
-                    "Jogador não encontrado: " + id);
+        if (posicao == null || posicao.isBlank()) {
+            throw new IllegalArgumentException(
+                    "A posição deve ser informada.");
         }
-
-        jogadorRepository.deleteById(id);
+    
+        return jogadorRepository
+                .findByPosicaoJogadorContainingIgnoreCase(posicao.trim());
     }
+    
 }

@@ -41,12 +41,18 @@ public class UsuarioController {
         return "usuario/cadastro";
     }
 
-       usuarioService.cadastrar(dto);
-
       return "redirect:/login";
     }
 
-    @GetMapping
+    @GetMapping("/cadastrar")
+public String exibirCadastro(Model model) {
+    model.addAttribute("usuarioCadastroDto",
+            new UsuarioCadastroDto());
+
+    return "usuario/cadastro";
+}
+
+    @GetMapping("/listar")
     public String listar(Model model) {
 
         model.addAttribute("usuarios",

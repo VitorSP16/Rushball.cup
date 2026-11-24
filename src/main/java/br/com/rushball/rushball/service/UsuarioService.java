@@ -37,6 +37,11 @@ public class UsuarioService {
     }
 
     public Usuario cadastrar(UsuarioCadastroDto dto) {
+        
+        if (dto == null) {
+    throw new IllegalArgumentException(
+            "Os dados do cadastro são obrigatórios.");
+}
 
         if (dto.getSenhaUsuario() == null ||
         !dto.getSenhaUsuario().equals(dto.getConfirmacaoSenha())) {
@@ -74,9 +79,20 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario definirSelecaoFavorita(Long idUsuario, Long idSelecao) {
+    public Usuario buscarPorEmail(String emailUsuario) {
 
-        Usuario usuario = buscarPorId(idUsuario);
+        return usuarioRepository
+                .findByEmailUsuarioIgnoreCase(emailUsuario)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Usuário não encontrado."));
+    }
+
+    public Usuario definirSelecaoFavorita(String emailUsuario, Long idSelecao) {
+
+        Usuario usuario = usuarioRepository
+                .findByEmailUsuarioIgnoreCase(emailUsuario)
+                .orElseThrow(() -> new EntityNotFoundException(
+                    "Usuário não encontrado."));
 
         Selecao selecao = selecaoRepository.findById(idSelecao)
                 .orElseThrow(() -> new EntityNotFoundException(
@@ -87,9 +103,12 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario removerSelecaoFavorita(Long idUsuario) {
+    public Usuario removerSelecaoFavorita(String emailUsuario) {
 
-        Usuario usuario = buscarPorId(idUsuario);
+        Usuario usuario = usuarioRepository
+                .findByEmailUsuarioIgnoreCase(emailUsuario)
+                .orElseThrow(() -> new EntityNotFoundException(
+                    "Usuário não encontrado."));
 
         usuario.setSelecaoFavorita(null);
 
@@ -98,11 +117,14 @@ public class UsuarioService {
 
     @Transactional
     public Usuario adicionarJogadorFavorito(
-            Long idUsuario,
+            String emailUsuario,
             Long idJogador) {
-
-        Usuario usuario = buscarPorId(idUsuario);
-
+         
+                Usuario usuario = usuarioRepository
+                .findByEmailUsuarioIgnoreCase(emailUsuario)
+                .orElseThrow(() -> new EntityNotFoundException(
+                    "Usuário não encontrado."));
+        
         Jogador jogador = jogadorRepository.findById(idJogador)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Jogador não encontrado: " + idJogador));
@@ -116,10 +138,13 @@ public class UsuarioService {
 
     @Transactional
     public Usuario removerJogadorFavorito(
-            Long idUsuario,
+            String emailUsuario,
             Long idJogador) {
 
-        Usuario usuario = buscarPorId(idUsuario);
+                Usuario usuario = usuarioRepository
+                .findByEmailUsuarioIgnoreCase(emailUsuario)
+                .orElseThrow(() -> new EntityNotFoundException(
+                    "Usuário não encontrado."));
 
         Jogador jogador = jogadorRepository.findById(idJogador)
                 .orElseThrow(() -> new EntityNotFoundException(

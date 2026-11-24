@@ -17,6 +17,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
 
+               
                 .requestMatchers(
                     "/",
                     "/error",
@@ -26,6 +27,7 @@ public class SecurityConfig {
                     "/usuarios/cadastrar"
                 ).permitAll()
 
+                
                 .requestMatchers(
                     HttpMethod.GET,
                     "/selecoes/**",
@@ -36,11 +38,13 @@ public class SecurityConfig {
                     "/comentarios/noticia/**"
                 ).permitAll()
 
+               
                 .requestMatchers(
-                    HttpMethod.POST,
-                    "/usuarios/cadastrar"
-                ).permitAll()
+                    "/usuarios/listar",
+                    "/usuarios/detalhes/**"
+                ).hasRole("ADMIN")
 
+               
                 .requestMatchers(
                     HttpMethod.POST,
                     "/comentarios/publicar/**"
@@ -48,6 +52,7 @@ public class SecurityConfig {
 
                 .requestMatchers("/usuarios/**").authenticated()
 
+                
                 .anyRequest().authenticated()
             )
 

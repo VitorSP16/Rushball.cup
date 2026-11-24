@@ -104,32 +104,34 @@ public class ComentarioService {
         return comentarioRepository.findByNoticiaIdNoticia(idNoticia);
     }
     
-    @Transactional 
-    public Long excluir(Long idComentario, String emailUsuario) {
+    @Transactional
+public Long excluir(Long idComentario, String emailUsuario) {
 
     Usuario usuario = usuarioRepository
             .findByEmailUsuarioIgnoreCase(emailUsuario)
             .orElseThrow(() -> new EntityNotFoundException(
                     "Usuário não encontrado."));
 
-    boolean pertenceAoUsuario =
-            comentarioRepository.existsByIdComentarioAndUsuarioIdUsuario(
-                    idComentario,
-                    usuario.getIdUsuario()
-            );
-
-    if (!pertenceAoUsuario) {
-        throw new EntityNotFoundException(
-                "Comentário não encontrado ou não pertence ao usuário.");
-    }
-
     Comentario comentario = buscarPorId(idComentario);
+
+    boolean administrador =
+            "ADMIN".equals(usuario.getPapelUsuario());
+
+    boolean pertenceAoUsuario =
+            comentario.getUsuario().getIdUsuario()
+                    .equals(usuario.getIdUsuario());
+
+    if (!administrador && !pertenceAoUsuario) {
+        throw new EntityNotFoundException(
+                "Comentário não encontrado ou sem permissão para excluí-lo.");
+    }
 
     Long idNoticia = comentario.getNoticia().getIdNoticia();
 
     comentarioRepository.delete(comentario);
 
     return idNoticia;
-}
+     }
        
+    
     }

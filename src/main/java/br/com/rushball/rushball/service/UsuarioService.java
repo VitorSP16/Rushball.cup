@@ -39,14 +39,21 @@ public class UsuarioService {
     public Usuario cadastrar(UsuarioCadastroDto dto) {
         
         if (dto == null) {
-    throw new IllegalArgumentException(
-            "Os dados do cadastro são obrigatórios.");
-}
-
-        if (dto.getSenhaUsuario() == null ||
-        !dto.getSenhaUsuario().equals(dto.getConfirmacaoSenha())) {
-    throw new IllegalArgumentException("As senhas não coincidem.");
-}
+            throw new IllegalArgumentException(
+                    "Os dados do cadastro são obrigatórios.");
+        }
+        
+        if (dto.getNomeUsuario() == null || dto.getNomeUsuario().isBlank()
+                || dto.getEmailUsuario() == null || dto.getEmailUsuario().isBlank()
+                || dto.getSenhaUsuario() == null || dto.getSenhaUsuario().isBlank()
+                || dto.getConfirmacaoSenha() == null || dto.getConfirmacaoSenha().isBlank()) {
+            throw new IllegalArgumentException(
+                    "Todos os campos do cadastro são obrigatórios.");
+        }
+        
+        if (!dto.getSenhaUsuario().equals(dto.getConfirmacaoSenha())) {
+            throw new IllegalArgumentException("As senhas não coincidem.");
+        }
     
         if (usuarioRepository.existsByEmailUsuarioIgnoreCase(dto.getEmailUsuario().trim())) {
             throw new IllegalArgumentException("Este email já está cadastrado.");

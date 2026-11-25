@@ -24,13 +24,13 @@ public class Selecao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSelecao;
-    
-    @NotBlank(message = "O país da seleção é obrigatório.")
+   
+    @NotBlank(message = " O nome da seleção é obrigatório.")
     @Size(max = 100 ,message="O nome deve ter no máximo 100 caracteres.")
     @Column(nullable = false, length = 100)
     private String nomeSelecao;
     
-    @NotBlank(message = "O nome da seleção é obrigatório.")
+    @NotBlank(message = "O país da seleção é obrigatório.")
     @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
     @Column(nullable = false, length = 100)
     private String paisSelecao;

@@ -2,7 +2,7 @@ package br.com.rushball.rushball.service;
 
 import java.util.List;
 
-import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;

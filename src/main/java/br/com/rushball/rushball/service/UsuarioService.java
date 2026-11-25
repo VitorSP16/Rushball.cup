@@ -75,9 +75,7 @@ public class UsuarioService {
                         "Usuário não encontrado: " + id));
     }
 
-    public Usuario salvar(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
+    
 
     public Usuario buscarPorEmail(String emailUsuario) {
 
@@ -155,11 +153,15 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    @Transactional
-    public void excluir(Long id) {
+   @Transactional
+   public void excluirPropriaConta(String emailUsuario) {
+    Usuario usuario = buscarPorEmail(emailUsuario);
+    usuarioRepository.delete(usuario);
+   }
 
-        Usuario usuario = buscarPorId(id);
-
-        usuarioRepository.delete(usuario);
-    }
+  @Transactional
+   public void excluirUsuario(Long id) {
+    Usuario usuario = buscarPorId(id);
+    usuarioRepository.delete(usuario);
+   }
 }

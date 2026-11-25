@@ -11,57 +11,47 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http) throws Exception {
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/error", "/acesso-negado",
+                        "/css/**", "/images/**", "/webjars/**").permitAll()
 
-               
-                .requestMatchers(
-                    "/",
-                    "/error",
-                    "/css/**",
-                    "/images/**",
-                    "/webjars/**",
-                    "/usuarios/cadastrar"
-                ).permitAll()
+                .requestMatchers(HttpMethod.GET, "/usuarios/cadastrar").permitAll()
+                .requestMatchers(HttpMethod.POST, "/usuarios/cadastrar").permitAll()
 
-                
-                .requestMatchers(
-                    HttpMethod.GET,
-                    "/selecoes/**",
-                    "/jogadores/**",
-                    "/jogos/**",
-                    "/estatisticas/**",
-                    "/noticias/**",
-                    "/comentarios/noticia/**"
-                ).permitAll()
+                .requestMatchers(HttpMethod.GET,
+                        "/selecoes/**", "/jogadores/**", "/jogos/**",
+                        "/estatisticas/**", "/noticias/**",
+                        "/comentarios/noticia/**").permitAll()
 
-               
-                .requestMatchers(
-                    "/usuarios/listar",
-                    "/usuarios/detalhes/**"
-                ).hasRole("ADMIN")
+               .requestMatchers(HttpMethod.GET,
+                              "/usuarios/listar",
+                             "/usuarios/detalhes/**").hasRole("ADMIN")
 
-               
-                .requestMatchers(
-                    HttpMethod.POST,
-                    "/comentarios/publicar/**"
-                ).authenticated()
+               .requestMatchers(HttpMethod.POST,
+                  "/usuarios/excluir/**").hasRole("ADMIN")
 
+                .requestMatchers(HttpMethod.POST,
+                        "/comentarios/publicar/**").authenticated()
+                .requestMatchers(HttpMethod.POST,
+                 "/usuarios/excluir-minha-conta").authenticated()
+
+              .requestMatchers(HttpMethod.POST,
+              "/usuarios/excluir/**").hasRole("ADMIN")
                 .requestMatchers("/usuarios/**").authenticated()
 
-                
                 .anyRequest().authenticated()
             )
-
+            .exceptionHandling(exception -> exception
+                .accessDeniedHandler((request, response, erro) ->
+                    response.sendRedirect("/acesso-negado"))
+            )
             .formLogin(form -> form
                 .usernameParameter("email")
                 .defaultSuccessUrl("/", true)
                 .permitAll()
             )
-
             .logout(logout -> logout
                 .logoutSuccessUrl("/")
             );

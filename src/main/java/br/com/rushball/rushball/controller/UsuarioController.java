@@ -1,6 +1,7 @@
 package br.com.rushball.rushball.controller;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 import br.com.rushball.rushball.service.UsuarioService;
@@ -141,4 +144,23 @@ public String removerJogadorFavorito(
 
         return "usuario/detalhes";
     }
+
+    @PostMapping("/excluir-minha-conta")
+    public String excluirMinhaConta(
+        Authentication authentication,
+        HttpServletRequest request,
+        HttpServletResponse response) {
+    String emailUsuario = authentication.getName();
+    usuarioService.excluirPropriaConta(emailUsuario);
+    new SecurityContextLogoutHandler()
+            .logout(request, response, authentication);
+
+    return "redirect:/";
+}
+   @PostMapping("/excluir/{id}")
+   public String excluirUsuario(@PathVariable Long id) {
+    usuarioService.excluirUsuario(id);
+
+    return "redirect:/usuarios/listar";
+   }
 }

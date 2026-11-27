@@ -14,6 +14,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
+
                 .requestMatchers("/", "/error", "/acesso-negado",
                         "/css/**", "/images/**", "/webjars/**").permitAll()
 
@@ -25,20 +26,19 @@ public class SecurityConfig {
                         "/estatisticas/**", "/noticias/**",
                         "/comentarios/noticia/**").permitAll()
 
-               .requestMatchers(HttpMethod.GET,
-                              "/usuarios/listar",
-                             "/usuarios/detalhes/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET,
+                        "/usuarios/listar",
+                        "/usuarios/detalhes/**").hasRole("ADMIN")
 
-               .requestMatchers(HttpMethod.POST,
-                  "/usuarios/excluir/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,
+                        "/usuarios/excluir/**").hasRole("ADMIN")
 
                 .requestMatchers(HttpMethod.POST,
                         "/comentarios/publicar/**").authenticated()
-                .requestMatchers(HttpMethod.POST,
-                 "/usuarios/excluir-minha-conta").authenticated()
 
-              .requestMatchers(HttpMethod.POST,
-              "/usuarios/excluir/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,
+                        "/usuarios/excluir-minha-conta").authenticated()
+
                 .requestMatchers("/usuarios/**").authenticated()
 
                 .anyRequest().authenticated()
@@ -49,7 +49,7 @@ public class SecurityConfig {
             )
             .formLogin(form -> form
                 .usernameParameter("email")
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/pagina", true)
                 .permitAll()
             )
             .logout(logout -> logout

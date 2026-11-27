@@ -14,224 +14,7 @@
     <!-- Fonte -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #06152b;
-            color: white;
-            min-height: 100vh;
-        }
-
-        /* NAVBAR */
-
-        .navbar {
-            padding: 22px 7%;
-            background: #041124;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 900;
-            color: white;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: #ffc928;
-        }
-
-        .voltar {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .voltar:hover {
-            color: #ffc928;
-        }
-
-        /* LOGIN */
-
-        .login-section {
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            padding: 50px 0;
-            background:
-                radial-gradient(circle at 80% 50%, #174a7b 0%, transparent 40%),
-                linear-gradient(120deg, #06152b, #0b2b50);
-        }
-
-        .login-container {
-            background: rgba(5, 23, 46, 0.85);
-            border: 1px solid rgba(255,255,255,0.10);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        /* FORMULÁRIO */
-
-        .login-form {
-            padding: 55px 45px;
-        }
-
-        .tag {
-            color: #ffc928;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-
-        .login-form h1 {
-            font-size: 36px;
-            font-weight: 900;
-            margin-bottom: 10px;
-        }
-
-        .login-form h1 span {
-            color: #ffc928;
-        }
-
-        .descricao {
-            color: #aab8c9;
-            font-size: 14px;
-            margin-bottom: 35px;
-        }
-
-        .form-label {
-            color: white;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .form-control {
-            background: #102b4b;
-            border: 1px solid #294361;
-            color: white;
-            padding: 13px;
-            border-radius: 5px;
-        }
-
-        .form-control:focus {
-            background: #102b4b;
-            color: white;
-            border-color: #ffc928;
-            box-shadow: 0 0 0 0.2rem rgba(255,201,40,0.15);
-        }
-
-        .form-control::placeholder {
-            color: #8192a8;
-        }
-
-        .esqueceu {
-            color: #ffc928;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .esqueceu:hover {
-            color: white;
-        }
-
-        .btn-entrar {
-            width: 100%;
-            background: #ffc928;
-            color: #06152b;
-            border: none;
-            padding: 14px;
-            border-radius: 5px;
-            font-weight: 900;
-            margin-top: 25px;
-            transition: 0.3s;
-        }
-
-        .btn-entrar:hover {
-            background: white;
-            transform: translateY(-2px);
-        }
-
-        .cadastro {
-            text-align: center;
-            margin-top: 25px;
-            font-size: 13px;
-            color: #aab8c9;
-        }
-
-        .cadastro a {
-            color: #ffc928;
-            text-decoration: none;
-            font-weight: 800;
-        }
-
-        /* IMAGEM */
-
-        .login-image {
-            position: relative;
-            min-height: 570px;
-            height: 100%;
-            background:
-                linear-gradient(rgba(3,15,32,0.35), rgba(3,15,32,0.75)),
-                url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=85');
-
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: end;
-            padding: 40px;
-        }
-
-        .image-text {
-            position: relative;
-            z-index: 2;
-        }
-
-        .image-text h2 {
-            font-size: 38px;
-            font-weight: 900;
-            line-height: 1.1;
-        }
-
-        .image-text h2 span {
-            color: #ffc928;
-        }
-
-        .image-text p {
-            color: #d2dce8;
-            font-size: 13px;
-            margin-top: 15px;
-        }
-
-        /* RESPONSIVIDADE */
-
-        @media (max-width: 768px) {
-
-            .login-form {
-                padding: 40px 25px;
-            }
-
-            .login-image {
-                display: none;
-            }
-
-            .login-form h1 {
-                font-size: 30px;
-            }
-
-        }
-
-    </style>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 
 </head>
 
@@ -242,11 +25,11 @@
 
         <div class="container-fluid">
 
-            <a href="index.html" class="logo">
+            <a th:href="@{/}" class="logo"
                 RUSHBALL<span>.cup</span>
-            </a>
+            >
 
-            <a href="index.html" class="voltar">
+            <a  th:href="@{ / }" class="voltar">
                 ← Voltar ao início
             </a>
 
@@ -281,7 +64,7 @@
                                 Entre na sua conta e acompanhe tudo sobre a Copa.
                             </p>
 
-                            <form action="#" method="POST">
+                            <form th:action="@{/login}" method="POST">
 
                                 <div class="mb-4">
 
@@ -291,6 +74,7 @@
 
                                     <input
                                         type="email"
+                                        name="email"
                                         class="form-control"
                                         placeholder="Digite seu e-mail"
                                         required
@@ -307,6 +91,7 @@
 
                                     <input
                                         type="password"
+                                        name="password"
                                         class="form-control"
                                         placeholder="Digite sua senha"
                                         required
@@ -324,12 +109,20 @@
 
                             </form>
 
+                            <div th:if="${param.error}" class="alert alert-danger">
+                                E-mail ou senha incorretos.
+                            </div>
+                            
+                            <div th:if="${param.logout}" class="alert alert-success">
+                                Você saiu da sua conta com sucesso.
+                            </div>
+
 
                             <div class="cadastro">
 
                                 Ainda não tem uma conta?
 
-                                <a href="cadastro.html">
+                                <a th:href="@{/usuarios/cadastrar}">
                                     Cadastre-se
                                 </a>
 

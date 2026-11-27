@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rushball.cup | Início</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+        <link rel="stylesheet" th:href="@{/css/pagina.css}">
+
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <a th:href="@{/}" class="logo">
+            RUSHBALL<span>.cup</span>
+        </a>
+
+        <div class="menu-label">MENU PRINCIPAL</div>
+
+        <nav class="menu">
+
+            <a th:href="@{/}" class="active">
+                <span class="menu-icon">⌂</span>
+                <span>Início</span>
+            </a>
+
+            <a th:href="@{/jogos}">
+                <span class="menu-icon">⚽</span>
+                <span>Jogos</span>
+            </a>
+
+            <a th:href="@{/selecoes}">
+                <span class="menu-icon">🏆</span>
+                <span>Seleções</span>
+            </a>
+
+            <a th:href="@{/jogadores/listar}">
+                <span class="menu-icon">👥</span>
+                <span>Jogadores</span>
+            </a>
+
+            <a th:href="@{/noticias}">
+                <span class="menu-icon">📰</span>
+                <span>Notícias</span>
+            </a>
+
+            <a th:href="@{/estatisticas}">
+                <span class="menu-icon">📊</span>
+                <span>Estatísticas</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-divider"></div>
+
+            <a th:href="@{/usuarios/perfil}" class="profile-link">
+                <span class="menu-icon">👤</span>
+                Meu perfil
+            </a>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="logout-button">
+                    <span>↪</span>
+                    Sair da conta
+                </button>
+            </form>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <span class="topbar-subtitle">RUSHBALL.CUP / PAINEL</span>
+                <h2>Página inicial</h2>
+            </div>
+
+            <a th:href="@{/usuarios/perfil}" class="user">
+                <div class="user-avatar">👤</div>
+
+                <div class="user-info">
+                    <span class="user-greeting">BEM-VINDO</span>
+
+                    <strong sec:authentication="name">
+                        Usuário
+                    </strong>
+                </div>
+
+                <span class="user-arrow">›</span>
+            </a>
+
+        </header>
+
+
+        <section class="welcome">
+
+            <div class="welcome-content">
+
+                <div class="tag">
+                    <span></span>
+                    O FUTEBOL ACONTECE AQUI
+                </div>
+
+                <h1>
+                    A COPA DO MUNDO
+                    <br>
+                    <span>EM UM SÓ LUGAR.</span>
+                </h1>
+
+                <p>
+                    Acompanhe cada partida, descubra as seleções,
+                    conheça os jogadores e fique por dentro de
+                    tudo que acontece no campeonato.
+                </p>
+
+                <a th:href="@{/noticias}" class="welcome-button">
+                    EXPLORAR NOTÍCIAS
+                    <span>→</span>
+                </a>
+
+            </div>
+
+            <div class="welcome-decoration">
+                <div class="circle circle-one"></div>
+                <div class="circle circle-two"></div>
+                <div class="football">⚽</div>
+                <span class="decoration-text">RUSHBALL CUP</span>
+            </div>
+
+            <div class="welcome-number">01</div>
+
+        </section>
+
+
+        <section class="section-heading">
+
+            <div>
+                <span class="section-subtitle">DESCUBRA MAIS</span>
+                <h2>Explore o campeonato</h2>
+            </div>
+
+            <span class="section-description">
+                TUDO SOBRE A COPA EM UM SÓ LUGAR
+            </span>
+
+        </section>
+
+
+        <section class="cards">
+
+            <article class="card">
+
+                <div class="card-top">
+                    <div class="card-icon">⚽</div>
+                    <span class="card-number">01</span>
+                </div>
+
+                <h3>Jogos</h3>
+
+                <p>
+                    Confira os confrontos e acompanhe os resultados
+                    das partidas do campeonato.
+                </p>
+
+                <a th:href="@{/jogos}">
+                    VER JOGOS <span>→</span>
+                </a>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-top">
+                    <div class="card-icon">🏆</div>
+                    <span class="card-number">02</span>
+                </div>
+
+                <h3>Seleções</h3>
+
+                <p>
+                    Conheça as equipes participantes e descubra
+                    mais sobre cada seleção.
+                </p>
+
+                <a th:href="@{/selecoes}">
+                    VER SELEÇÕES <span>→</span>
+                </a>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-top">
+                    <div class="card-icon">👥</div>
+                    <span class="card-number">03</span>
+                </div>
+
+                <h3>Jogadores</h3>
+
+                <p>
+                    Conheça os atletas, suas posições e informações
+                    individuais.
+                </p>
+
+                <a th:href="@{/jogadores/listar}">
+                    VER JOGADORES <span>→</span>
+                </a>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-top">
+                    <div class="card-icon">📰</div>
+                    <span class="card-number">04</span>
+                </div>
+
+                <h3>Notícias</h3>
+
+                <p>
+                    Fique atualizado com as novidades e acontecimentos
+                    do mundo da Copa.
+                </p>
+
+                <a th:href="@{/noticias}">
+                    VER NOTÍCIAS <span>→</span>
+                </a>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-top">
+                    <div class="card-icon">📊</div>
+                    <span class="card-number">05</span>
+                </div>
+
+                <h3>Estatísticas</h3>
+
+                <p>
+                    Explore os números e acompanhe o desempenho
+                    dos jogadores.
+                </p>
+
+                <a th:href="@{/estatisticas}">
+                    VER ESTATÍSTICAS <span>→</span>
+                </a>
+
+            </article>
+
+
+           
+        </section>
+
+
+        <footer>
+            <span>RUSHBALL<span class="footer-highlight">.cup</span></span>
+            <span>© 2026 Rushball Cup - Todos os direitos reservados.</span>
+        </footer>
+
+    </main>
+
+</body>
+</html>

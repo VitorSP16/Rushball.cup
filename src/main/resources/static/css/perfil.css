@@ -1,0 +1,479 @@
+/* PERFIL DO USUÁRIO */
+
+.active-profile {
+    color: #ffc928 !important;
+    background: linear-gradient(
+        90deg,
+        rgba(255,201,40,0.15),
+        rgba(255,201,40,0.03)
+    );
+    border-left: 3px solid #ffc928;
+}
+
+/* CABEÇALHO DO PERFIL */
+
+.profile-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 35px;
+    min-height: 190px;
+    background:
+        radial-gradient(
+            circle at 90% 50%,
+            rgba(31,91,145,0.65),
+            transparent 35%
+        ),
+        linear-gradient(120deg, #0a2341, #102f52);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 42px;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: #183859;
+    border: 2px solid rgba(255,201,40,0.5);
+    border-radius: 50%;
+    font-size: 43px;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-header-info {
+    position: relative;
+    z-index: 2;
+}
+
+.profile-tag {
+    display: block;
+    color: #ffc928;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.profile-header-info h1 {
+    font-size: 27px;
+    font-weight: 900;
+    margin-bottom: 7px;
+    overflow-wrap: anywhere;
+}
+
+.profile-header-info p {
+    color: #b9c9dc;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+    margin-bottom: 12px;
+}
+
+.account-role {
+    display: inline-block;
+    padding: 6px 12px;
+    color: #ffc928;
+    background: rgba(255,201,40,0.1);
+    border: 1px solid rgba(255,201,40,0.2);
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.profile-header-decoration {
+    position: absolute;
+    right: 9%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 125px;
+    opacity: 0.13;
+}
+
+/* SEÇÕES */
+
+.profile-section {
+    margin-bottom: 42px;
+}
+
+.profile-section .section-heading {
+    margin-bottom: 20px;
+}
+
+.section-link {
+    color: #ffc928;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.section-link:hover {
+    color: white;
+}
+
+/* INFORMAÇÕES DA CONTA */
+
+.account-info-card {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 22px;
+    background: #0c213d;
+    min-width: 0;
+}
+
+.info-label {
+    color: #71829a;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.info-item strong {
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* SELEÇÃO FAVORITA */
+
+.favorite-selection {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 25px;
+    background: linear-gradient(145deg, #0d2745, #0a1e37);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.favorite-selection:hover {
+    border-color: rgba(255,201,40,0.35);
+}
+
+.selection-flag {
+    width: 95px;
+    height: 75px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: #183859;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 35px;
+}
+
+.selection-flag img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.selection-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.favorite-label {
+    display: block;
+    color: #ffc928;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.selection-info h3 {
+    font-size: 19px;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.selection-info p {
+    color: #9aacc1;
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.selection-group {
+    display: inline-block;
+    padding: 5px 10px;
+    color: #ffc928;
+    background: rgba(255,201,40,0.1);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.favorite-selection form {
+    flex-shrink: 0;
+}
+
+.remove-favorite {
+    padding: 10px 13px;
+    border: 1px solid rgba(255,100,100,0.25);
+    border-radius: 5px;
+    background: rgba(255,100,100,0.08);
+    color: #ff8585;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.remove-favorite:hover {
+    background: rgba(255,100,100,0.18);
+    border-color: #ff8585;
+}
+
+/* JOGADORES FAVORITOS */
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.player-card {
+    padding: 22px;
+    background: linear-gradient(145deg, #0d2745, #0a1e37);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    transition: 0.3s;
+    min-width: 0;
+}
+
+.player-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,201,40,0.4);
+}
+
+.player-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.player-avatar {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    background: rgba(40,140,220,0.12);
+    border: 1px solid rgba(40,140,220,0.2);
+    border-radius: 9px;
+    font-size: 23px;
+}
+
+.player-number {
+    color: #ffc928;
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.player-info h3 {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 7px;
+    overflow-wrap: anywhere;
+}
+
+.player-info p {
+    color: #9aacc1;
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.player-selection {
+    display: inline-block;
+    color: #ffc928;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.remove-player {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid rgba(255,100,100,0.2);
+    border-radius: 5px;
+    background: rgba(255,100,100,0.06);
+    color: #ff8585;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.remove-player:hover {
+    background: rgba(255,100,100,0.17);
+    border-color: #ff8585;
+}
+
+/* ESTADO VAZIO */
+
+.empty-favorite {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 35px 20px;
+    background: #0c213d;
+    border: 1px dashed rgba(255,255,255,0.14);
+    border-radius: 10px;
+}
+
+.empty-icon {
+    font-size: 37px;
+    margin-bottom: 14px;
+}
+
+.empty-favorite h3 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.empty-favorite p {
+    max-width: 430px;
+    color: #9aacc1;
+    font-size: 11px;
+    line-height: 1.8;
+    margin-bottom: 18px;
+}
+
+.empty-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 17px;
+    background: #ffc928;
+    color: #06152b;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 900;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.empty-button:hover {
+    background: white;
+    transform: translateY(-2px);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1100px) {
+
+    .players-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .profile-header {
+        padding: 28px;
+    }
+
+    .profile-header-decoration {
+        right: 3%;
+        opacity: 0.08;
+    }
+
+    .favorite-selection {
+        flex-wrap: wrap;
+    }
+
+    .favorite-selection form {
+        width: 100%;
+    }
+
+    .remove-favorite {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 25px;
+        gap: 17px;
+    }
+
+    .profile-avatar {
+        width: 78px;
+        height: 78px;
+        font-size: 34px;
+    }
+
+    .profile-header-info h1 {
+        font-size: 22px;
+    }
+
+    .profile-header-decoration {
+        right: 10px;
+        top: 25px;
+        transform: none;
+        font-size: 90px;
+    }
+
+    .account-info-card {
+        grid-template-columns: 1fr;
+    }
+
+    .info-item {
+        padding: 18px;
+    }
+
+    .players-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .favorite-selection {
+        align-items: flex-start;
+        gap: 15px;
+        padding: 18px;
+    }
+
+    .selection-flag {
+        width: 75px;
+        height: 65px;
+    }
+
+    .selection-info h3 {
+        font-size: 16px;
+    }
+
+    .section-link {
+        font-size: 9px;
+    }
+
+}

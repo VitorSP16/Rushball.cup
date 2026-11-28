@@ -48,10 +48,13 @@ public class SecurityConfig {
                     response.sendRedirect("/acesso-negado"))
             )
             .formLogin(form -> form
-                .usernameParameter("email")
-                .defaultSuccessUrl("/pagina", true)
-                .permitAll()
-            )
+    .loginPage("/login")
+    .loginProcessingUrl("/login")
+    .usernameParameter("email")
+    .passwordParameter("password")
+    .defaultSuccessUrl("/pagina", true)
+    .permitAll()
+)
             .logout(logout -> logout
                 .logoutSuccessUrl("/")
             );

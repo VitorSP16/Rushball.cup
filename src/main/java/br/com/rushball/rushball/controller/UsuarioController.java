@@ -32,7 +32,7 @@ public class UsuarioController {
 
     @PostMapping("/cadastrar")
         public String cadastrar(
-        @Valid @ModelAttribute UsuarioCadastroDto dto,
+        @Valid @ModelAttribute ("usuarioCadastroDto") UsuarioCadastroDto dto,
         BindingResult resultado,Model model) {
 
        if (resultado.hasErrors()) {

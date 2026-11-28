@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rushball.cup | Meu perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/pagina.css}">
+    <link rel="stylesheet" th:href="@{/css/perfil.css}">
+</head>
+
+<body>
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+        <a th:href="@{/pagina}" class="logo">
+            RUSHBALL<span>.cup</span>
+        </a>
+
+        <div class="menu-label">MENU PRINCIPAL</div>
+
+        <nav class="menu">
+
+            <a th:href="@{/pagina}">
+                <span class="menu-icon">⌂</span>
+                <span>Início</span>
+            </a>
+
+            <a th:href="@{/jogos}">
+                <span class="menu-icon">⚽</span>
+                <span>Jogos</span>
+            </a>
+
+            <a th:href="@{/selecoes}">
+                <span class="menu-icon">🏆</span>
+                <span>Seleções</span>
+            </a>
+
+            <a th:href="@{/jogadores/listar}">
+                <span class="menu-icon">👥</span>
+                <span>Jogadores</span>
+            </a>
+
+            <a th:href="@{/noticias}">
+                <span class="menu-icon">📰</span>
+                <span>Notícias</span>
+            </a>
+
+            <a th:href="@{/estatisticas}">
+                <span class="menu-icon">📊</span>
+                <span>Estatísticas</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-divider"></div>
+
+            <a th:href="@{/usuarios/perfil}" class="profile-link active-profile">
+                <span class="menu-icon">👤</span>
+                Meu perfil
+            </a>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="logout-button">
+                    <span>↪</span>
+                    Sair da conta
+                </button>
+            </form>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <span class="topbar-subtitle">RUSHBALL.CUP / CONTA</span>
+                <h2>Meu perfil</h2>
+            </div>
+
+            <a th:href="@{/usuarios/perfil}" class="user">
+
+                <div class="user-avatar">👤</div>
+
+                <div class="user-info">
+                    <span class="user-greeting">BEM-VINDO</span>
+
+                    <strong th:text="${usuario.nomeUsuario}">
+                        Nome do usuário
+                    </strong>
+                </div>
+
+                <span class="user-arrow">›</span>
+
+            </a>
+
+        </header>
+
+
+        <!-- APRESENTAÇÃO DO USUÁRIO -->
+
+        <section class="profile-header">
+
+            <div class="profile-avatar">
+                👤
+            </div>
+
+            <div class="profile-header-info">
+
+                <span class="profile-tag">MINHA CONTA</span>
+
+                <h1 th:text="${usuario.nomeUsuario}">
+                    Nome do usuário
+                </h1>
+
+                <p th:text="${usuario.emailUsuario}">
+                    usuario@email.com
+                </p>
+
+                <span class="account-role"
+                      th:text="${usuario.papelUsuario}">
+                    USER
+                </span>
+
+            </div>
+
+            <div class="profile-header-decoration">
+                ⚽
+            </div>
+
+        </section>
+
+
+        <!-- INFORMAÇÕES DA CONTA -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-subtitle">SEUS DADOS</span>
+                    <h2>Informações da conta</h2>
+                </div>
+
+            </div>
+
+            <div class="account-info-card">
+
+                <div class="info-item">
+                    <span class="info-label">NOME COMPLETO</span>
+
+                    <strong th:text="${usuario.nomeUsuario}">
+                        Nome do usuário
+                    </strong>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">E-MAIL</span>
+
+                    <strong th:text="${usuario.emailUsuario}">
+                        usuario@email.com
+                    </strong>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">IDENTIFICAÇÃO</span>
+
+                    <strong th:text="${usuario.idUsuario}">
+                        1
+                    </strong>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">TIPO DE CONTA</span>
+
+                    <strong th:text="${usuario.papelUsuario}">
+                        USER
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SELEÇÃO FAVORITA -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-subtitle">SUA ESCOLHA</span>
+                    <h2>Minha seleção favorita</h2>
+                </div>
+
+                <a th:href="@{/selecoes}" class="section-link">
+                    EXPLORAR SELEÇÕES →
+                </a>
+
+            </div>
+
+
+            <div class="favorite-selection"
+                 th:if="${selecaoFavorita != null}">
+
+                <div class="selection-flag">
+
+                    <img th:if="${selecaoFavorita.bandeiraSelecao != null
+                                  and !#strings.isEmpty(selecaoFavorita.bandeiraSelecao)}"
+                         th:src="${selecaoFavorita.bandeiraSelecao}"
+                         th:alt="'Bandeira de ' + ${selecaoFavorita.paisSelecao}">
+
+                    <span th:if="${selecaoFavorita.bandeiraSelecao == null
+                                  or #strings.isEmpty(selecaoFavorita.bandeiraSelecao)}">
+                        🏆
+                    </span>
+
+                </div>
+
+                <div class="selection-info">
+
+                    <span class="favorite-label">SELEÇÃO FAVORITA</span>
+
+                    <h3 th:text="${selecaoFavorita.nomeSelecao}">
+                        Nome da seleção
+                    </h3>
+
+                    <p th:text="${selecaoFavorita.paisSelecao}">
+                        País
+                    </p>
+
+                    <span class="selection-group"
+                          th:if="${selecaoFavorita.grupoSelecao != null}"
+                          th:text="'Grupo ' + ${selecaoFavorita.grupoSelecao}">
+                        Grupo A
+                    </span>
+
+                </div>
+
+                <form th:action="@{/usuarios/favoritos/selecao/remover}"
+                      method="post">
+
+                    <button type="submit" class="remove-favorite">
+                        Remover favorita
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <div class="empty-favorite"
+                 th:if="${selecaoFavorita == null}">
+
+                <div class="empty-icon">🏆</div>
+
+                <h3>Nenhuma seleção favorita</h3>
+
+                <p>
+                    Você ainda não escolheu sua seleção favorita.
+                    Explore as seleções e escolha a sua!
+                </p>
+
+                <a th:href="@{/selecoes}" class="empty-button">
+                    EXPLORAR SELEÇÕES →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- JOGADORES FAVORITOS -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-subtitle">SEUS CRAQUES</span>
+                    <h2>Jogadores favoritos</h2>
+                </div>
+
+                <a th:href="@{/jogadores/listar}" class="section-link">
+                    EXPLORAR JOGADORES →
+                </a>
+
+            </div>
+
+
+            <div class="players-grid"
+                 th:if="${!#lists.isEmpty(jogadoresFavoritos)}">
+
+                <article class="player-card"
+                         th:each="jogador : ${jogadoresFavoritos}">
+
+                    <div class="player-card-top">
+
+                        <div class="player-avatar">
+                            👤
+                        </div>
+
+                        <span class="player-number"
+                              th:if="${jogador.numeroCamisaJogador != null}"
+                              th:text="'#' + ${jogador.numeroCamisaJogador}">
+                            #10
+                        </span>
+
+                    </div>
+
+                    <div class="player-info">
+
+                        <h3 th:text="${jogador.nomeJogador}">
+                            Nome do jogador
+                        </h3>
+
+                        <p th:text="${jogador.posicaoJogador}">
+                            Posição
+                        </p>
+
+                        <span class="player-selection"
+                              th:text="${jogador.selecao.nomeSelecao}">
+                            Seleção
+                        </span>
+
+                    </div>
+
+                    <form th:action="@{/usuarios/favoritos/jogador/remover/{idJogador}(idJogador=${jogador.idJogador})}"
+                          method="post">
+
+                        <button type="submit" class="remove-player">
+                            REMOVER DOS FAVORITOS
+                        </button>
+
+                    </form>
+
+                </article>
+
+            </div>
+
+
+            <div class="empty-favorite"
+                 th:if="${#lists.isEmpty(jogadoresFavoritos)}">
+
+                <div class="empty-icon">⚽</div>
+
+                <h3>Nenhum jogador favorito</h3>
+
+                <p>
+                    Você ainda não adicionou jogadores aos seus favoritos.
+                    Explore os atletas participantes da Copa!
+                </p>
+
+                <a th:href="@{/jogadores/listar}" class="empty-button">
+                    EXPLORAR JOGADORES →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- RODAPÉ -->
+
+        <footer>
+
+            <span>
+                RUSHBALL<span class="footer-highlight">.cup</span>
+            </span>
+
+            <span>
+                © 2026 Rushball Cup - Todos os direitos reservados.
+            </span>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>
